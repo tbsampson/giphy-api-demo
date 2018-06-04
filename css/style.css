@@ -1,0 +1,15 @@
+.btn-small:hover {
+    box-shadow: none!important;
+    background-color: #f8f9fa!important;
+    color: limegreen;
+    transition-duration: .2s;
+}
+
+.gif:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; 
+    transition-duration: .2s;
+}
+
+.someClass {
+    transition-duration: .2s;
+}
