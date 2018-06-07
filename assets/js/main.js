@@ -8,11 +8,6 @@ const listObj = '.btn.btn-small.shadow-sm.p-1.mr-1.ml-1.mt-1.mb-1.bg-white.round
 const buttonClear = '.btn.btn-small.shadow-sm.text-warning.p-1.mr-1.ml-1.mt-1.mb-1.bg-danger.rounded'; // clear button class
 const gifImg = '.someClass'; // gif 
 
-// Give each button the same master class for example ".gifbuttons"
-// create your on click listener for the .gifbuttons class at the top
-// use data-topic to get the topic out of the element
-// $(".gifbuttons").on()
-
 makeButtons(); //make buttons
 function makeButtons() {
     $('.row.button-row').empty();
@@ -42,8 +37,8 @@ function displayGifs() { // click a button, get related gifs
                 let x = tempGifArray[i].images.fixed_height;
                 if (x.width < 500) {
                     $('.row.gif-row').append(`<div class="btn btn-small shadow-sm bg-white mr-1 ml-1 mt-1 mb-1">
-                        <img class="someClass" src="${x.url}" height="${x.height}" width="${x.width}" go="${x.url}" 
-                            stop="${tempGifArray[i].images.fixed_height_still.url}"</div>`)
+                        <img class="someClass" src="${tempGifArray[i].images.fixed_height_still.url}" height="${x.height}" width="${x.width}" data-go="${x.url}" 
+                            data-stop="${tempGifArray[i].images.fixed_height_still.url}"</div>`)
                 }        
             }
         }
@@ -57,21 +52,16 @@ function addTopic() { // add topic from user input
     makeButtons();
 };
 
-// does not work
 function startStop() { // swap gif with jpg
     console.log("Image was clicked")
-    var src = ($(this).attr('src') === $(this).attr('go'))
-        ? $(this).attr('stop')
-        : $(this).attr('go');
+    var src = ($(this).attr('src') === $(this).attr('data-go'))
+        ? $(this).attr('data-stop')
+        : $(this).attr('data-go');
     $(this).attr('src', src);
 }
 
 $(document).on("click", gifImg, startStop);
-
 $(document).on("click", buttonClear, clearGifs);
-
 $(document).on("click", '#topicSubmit', addTopic);
-
-
 $(document).on("click", listObj, displayGifs);
 
